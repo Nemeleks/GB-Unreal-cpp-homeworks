@@ -2,7 +2,6 @@
 #include <Windows.h>
 #include <string>
 #include <vector>
-#include <conio.h>
 using namespace std;
 
 typedef	struct sInputDir
