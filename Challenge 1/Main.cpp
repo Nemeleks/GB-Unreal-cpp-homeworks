@@ -71,16 +71,25 @@ void ResetDir(tInputDir* dir)
 	dir->q = 0;
 }
 
-vector <vector <char> >  DrawMap(int w, int h)
+void GoToXY(short x, short y)
+{
+	COORD coord = { x, y };
+
+	if (!SetConsoleCursorPosition(GetConsoleHandle(), coord))
+	{
+		cout << "error SetConsoleCoursorPosition()";
+	}
+}
+vector <vector <string> >  DrawMap(int w, int h)
 {
 	int width = w;
 	int height = h;
-	vector <vector <char> > arr(width, vector <char>(height));
+	vector <vector <string> > arr(width, vector <string>(height));
 	for (int i = 0; i < width; i++)//заполняем вектор пробелами и делаем границы
 	{
 		for (int j = 0; j < height; j++)
 		{
-			if (i == 2 || i == (width - 1) || (j == 0 && i >= 2) || (j == (height - 1) && i >= 2))
+			if (i == 3 || i == (width - 1) || (j == 0 && i >= 3) || (j == (height - 1) && i >= 3))
 			{
 				arr[i][j] = '+';
 			}
@@ -88,7 +97,11 @@ vector <vector <char> >  DrawMap(int w, int h)
 				arr[i][j] = ' ';
 		}
 	}
-	for (int i = 9; i < 13; i++) // делаем препядствие
+	
+	arr[0][1] = "################ Use WASD to move character ############## ";
+	arr[1][0] = "###################### Press Q to exit #####################";
+	
+	for (int i = 9; i < 13; i++) // делаем препятствие
 	{
 		for (int j = 12; j < 16 ; j++)
 		{
@@ -114,21 +127,18 @@ private:
 	double speed;
 
 public:
-	void SetCoords(short x, short y, vector <vector <char> > arr)
+	void SetCoords(short x, short y, vector <vector <string> > arr)
 	{
-		if (arr[(int)(pos.Y - 1)][(int)(pos.X + x * speed)] == ' ')
+		if (arr[(int)(pos.Y)][(int)(pos.X + x * speed)] == " ")
 		{
 			pos.X += x * speed;
 		}
-		if (arr[(int)(pos.Y - 1 + y * speed)][(int)pos.X] == ' ')
+		if (arr[(int)(pos.Y + y * speed)][(int)pos.X] == " ")
 		{
 			pos.Y += y * speed;
 		}		
 	}
-	void SetXCoord(short x)
-	{
-		pos.X += x * speed;
-	}
+
 	COORD getCoord()
 	{
 		COORD coord;
@@ -136,6 +146,7 @@ public:
 		coord.Y = (short)pos.Y;
 		return coord;
 	}
+
 	void CreatePlayer(short x, short y, double speed)
 	{
 		pos.X = (double)x + 0.5;
@@ -169,22 +180,6 @@ void Move(Player* player)
 	}
 }
 
-void gameRules()
-{
-	cout << " ################ Use WASD to move character ############## " << endl;
-	cout << "###################### Press Q to exit #####################";
-}
-
-void GoToXY(short x, short y)
-{
-	COORD coord = { x, y };
-
-	if (!SetConsoleCursorPosition(GetConsoleHandle(), coord))
-	{
-		cout << "error SetConsoleCoursorPosition()";
-	}
-}
-
 int main()
 {
 	ULONGLONG now;
@@ -198,10 +193,8 @@ int main()
 	mapHeight = 60;
 	player.CreatePlayer(10, 15, 0.5);
 	InvisibleCoursor();
-	vector <vector <char>> arr;
-	gameRules();
+	vector <vector <string>> arr;
 	arr = DrawMap(mapWidth, mapHeight);
-
 
 	do
 	{
