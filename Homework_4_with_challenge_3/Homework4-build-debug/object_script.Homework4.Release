@@ -1,0 +1,15 @@
+release/anotherwindow.o
+release/main.o
+release/mainwindow.o
+release/task1.o
+release/task2.o
+release/task3.o
+release/task4.o
+release/task5.o
+release/moc_anotherwindow.o
+release/moc_mainwindow.o
+release/moc_task1.o
+release/moc_task2.o
+release/moc_task3.o
+release/moc_task4.o
+release/moc_task5.o
