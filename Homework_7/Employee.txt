@@ -1,0 +1,4 @@
+Employye name is: Mark
+Employye last name is: Green
+Employye position is: c++ developer
+Employye salary is: 100000 $
