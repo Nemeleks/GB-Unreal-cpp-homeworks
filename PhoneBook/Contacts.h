@@ -19,64 +19,31 @@ private:
 	std::string darkestSecret;
 
 public:
-	void add(std::string)
-	{
-		std::cout << "Enter First Name : " << std::endl;
-		bool result = true;
-		do
-		{
-			std::cin >> firstName;
-			for (size_t i = 0; i < firstName.size(); i++)
-			{
-				if (!isalpha(firstName[i]))
-				{
-					std::cout << "Wrong first name! Use only letters, please!" << std::endl;
-					result = false;
-					break;
-				}
-			}
+	void fillField(const std::string &msg, bool (Contacts::*f)(std::string str));
+	void fillContact();
+	std::string fill(const std::string msg);
+	std::string deleteSpaces(std::string str);
 
-		} while (result == false);
+	bool setFirstName(const std::string str);
+	bool setLastName(const std::string str);
+	bool setNickname(const std::string str);
+	bool setLogin(const std::string str);
+	bool setPostalAdress(const std::string str);
+	bool setEmail(const std::string str);
+	bool setPhoneNumber();
+	bool setBirthday();
+	bool setFavouriteMeal();
+	bool setUnderwearColor();
+	bool setDarkestSecret();
 
-		std::cout << "Enter Last Name : " << std::endl;
-		do
-		{
-			std::cin >> lastName;
-			for (size_t i = 0; i < lastName.size(); i++)
-			{
-				if (!isalpha(lastName[i]))
-				{
-					std::cout << "Wrong  last name! Use only letters, please!" << std::endl;
-					result = false;
-					break;
-				}
-			}
-		} while (result == false);
-		
-		std::cout << "Enter Nickname : " << std::endl;
-		do
-		{
-			std::cin >> nickname;
-			if (nickname.find(" "))
-			{
-				std::cout << "Wrong  nickname! Dont use spaces!" << std::endl;
-				result = false;
-			}
-			
-		} while (result == false);
+	static void print();
 
-		std::cout << "Enter login : " << std::endl;
-		do
-		{
-			std::cin >> login;
-			if (login.find(" "))
-			{
-				std::cout << "Wrong  login! Dont use spaces!" << std::endl;
-				result = false;
-			}
-
-		} while (result == false);
-	}
+	std::string getFirstName() const;
+	std::string getLastName() const;
+	std::string getNickname() const;
+	std::string getLogin() const;
+	std::string getPostalAdress() const;
+	std::string getEmail() const;
 
 };
 
