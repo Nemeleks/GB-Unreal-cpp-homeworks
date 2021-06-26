@@ -2,7 +2,6 @@
 #include <iostream>
 #include <string>
 
-constexpr auto MAX_CONTACTS = 8;
 class Contacts
 {
 private:
@@ -30,11 +29,11 @@ public:
 	bool setLogin(const std::string str);
 	bool setPostalAdress(const std::string str);
 	bool setEmail(const std::string str);
-	bool setPhoneNumber();
-	bool setBirthday();
-	bool setFavouriteMeal();
-	bool setUnderwearColor();
-	bool setDarkestSecret();
+	bool setPhoneNumber(const std::string str);
+	bool setBirthday(const std::string str);
+	bool setFavouriteMeal(const std::string str);
+	bool setUnderwearColor(const std::string str);
+	bool setDarkestSecret(const std::string str);
 
 	static void print();
 
@@ -44,6 +43,11 @@ public:
 	std::string getLogin() const;
 	std::string getPostalAdress() const;
 	std::string getEmail() const;
+	std::string getPhoneNumber() const;
+	std::string getBirthday() const;
+	std::string getFavouriteMeal() const;
+	std::string getUnderwearColor() const;
+	std::string getDarkestSecret() const;
 
 };
 

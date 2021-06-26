@@ -21,9 +21,15 @@
     <ClCompile Include="Contacts.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="Phonebook.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Contacts.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Phonebook.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

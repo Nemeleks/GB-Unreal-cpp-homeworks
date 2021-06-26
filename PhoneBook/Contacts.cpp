@@ -16,6 +16,12 @@ void Contacts::fillContact()
 	fillField("Login", &Contacts::setLogin);
 	fillField("Postal Adress", &Contacts::setPostalAdress);
 	fillField("Email", &Contacts::setEmail);
+	fillField("Phone Number", &Contacts::setPhoneNumber);
+	fillField("Birthday", &Contacts::setBirthday);
+	fillField("FavouriteMeal", &Contacts::setFavouriteMeal);
+	fillField("UnderwearColor", &Contacts::setUnderwearColor);
+	fillField("DarkestSecret", &Contacts::setDarkestSecret);
+	system("cls");
 }
 
 std::string Contacts::deleteSpaces(std::string str)
@@ -68,7 +74,7 @@ bool Contacts::setFirstName(const std::string str)
 			return false;
 		}
 	}
-
+	
 	firstName = str;
 	return true;
 }
@@ -143,7 +149,6 @@ bool Contacts::setEmail(const std::string str)
 		std::cout << "Wrong Email format. Need a dog." << std::endl;
 		return false;
 	}
-	//std::cout << dogPoint << std::endl;
 	if (str.find('.',dogPoint+2) != std::string::npos)
 	{
 		if (str.back() != '.')
@@ -165,29 +170,70 @@ bool Contacts::setEmail(const std::string str)
 	}
 }
 
-bool Contacts::setPhoneNumber()
+bool Contacts::setPhoneNumber(const std::string str)
 {
-	return false;
+	std::string correctValuels = "+1234567890";
+	if (str.find_first_not_of(correctValuels) == std::string::npos)
+	{
+		for (size_t i = 1; i < str.size(); i++)
+		{
+			if (str[i] == '+')
+			{
+				std::cout << "Wrong Phone Number. Use only + and digits" << std::endl;
+				return false;
+			}
+		}
+		phoneNumber = str;	
+		return true;
+	}
+	else
+	{
+		std::cout << "Wrong Phone Number. Use only + and digits" << std::endl;
+		return false;
+	}
+
 }
 
-bool Contacts::setBirthday()
+bool Contacts::setBirthday(const std::string str)
 {
-	return false;
+	std::string correctValues = "1234567890.";
+	
+	if (str.find_first_not_of(correctValues) == std::string::npos && str.size() == 10)
+	{
+		if (str[0] != '.' && str[1] != '.' && str[2] == '.'&& str[3] != '.' && str[4] != '.' && str[5] == '.'&&str[6] != '.' && str[7] != '.' && str[8] != '.' && str[9] != '.')
+		{
+			birthday = str;
+			return true;
+		}
+		else
+		{
+			std::cout << "Wrong Birthday. Use XX.XX.XXXX format please." << std::endl;
+			return false;
+		}
+	}
+	else
+	{
+		std::cout << "Wrong Birthday. Use XX.XX.XXXX format please." << std::endl;
+		return false;
+	}
 }
 
-bool Contacts::setFavouriteMeal()
+bool Contacts::setFavouriteMeal(const std::string str)
 {
-	return false;
+	favouriteMeal = str;
+	return true;
 }
 
-bool Contacts::setUnderwearColor()
+bool Contacts::setUnderwearColor(const std::string str)
 {
-	return false;
+	underwearColor = str;
+	return true;
 }
 
-bool Contacts::setDarkestSecret()
+bool Contacts::setDarkestSecret(const std::string str)
 {
-	return false;
+	darkestSecret = str;
+	return true;
 }
 
 void Contacts::print()
@@ -223,4 +269,25 @@ std::string Contacts::getLogin() const
 std::string Contacts::getEmail() const
 {
 	return email;
+}
+
+std::string Contacts::getPhoneNumber() const
+{
+	return phoneNumber;
+}
+std::string Contacts::getBirthday() const
+{
+	return birthday;
+}
+std::string Contacts::getFavouriteMeal() const
+{
+	return favouriteMeal;
+}
+std::string Contacts::getUnderwearColor() const
+{
+	return underwearColor;
+}
+std::string Contacts::getDarkestSecret() const
+{
+	return darkestSecret;
 }

@@ -12,8 +12,11 @@ int main()
 	std::cout << "Login : " << cont.getLogin() << std::endl;
 	std::cout << "Postal Adress : " << cont.getPostalAdress() << std::endl;
 	std::cout << "Email : " << cont.getEmail() << std::endl;
-
-
+	std::cout << "Phone Number : " << cont.getPhoneNumber() << std::endl;
+	std::cout << "Birthday : " << cont.getBirthday() << std::endl;
+	std::cout << "FavouriteMeal : " << cont.getFavouriteMeal() << std::endl;
+	std::cout << "UnderwearColor : " << cont.getUnderwearColor() << std::endl;
+	std::cout << "DarkestSecret : " << cont.getDarkestSecret() << std::endl;
 
 
 }
