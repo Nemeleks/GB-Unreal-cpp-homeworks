@@ -1,5 +1,6 @@
 #include "Contacts.h"
 
+
 void Contacts::fillField(const std::string &msg, bool(Contacts::* f)(std::string msg))
 {
 	do
@@ -8,19 +9,23 @@ void Contacts::fillField(const std::string &msg, bool(Contacts::* f)(std::string
 	} while (!(this->*f)(fill(msg)));
 }
 
+Contacts::Contacts()
+{
+}
+
 void Contacts::fillContact()
 {
 	fillField("First Name", &Contacts::setFirstName);
 	fillField("Last Name", &Contacts::setLastName);
 	fillField("Nickname", &Contacts::setNickname);
-	fillField("Login", &Contacts::setLogin);
-	fillField("Postal Adress", &Contacts::setPostalAdress);
-	fillField("Email", &Contacts::setEmail);
-	fillField("Phone Number", &Contacts::setPhoneNumber);
-	fillField("Birthday", &Contacts::setBirthday);
-	fillField("FavouriteMeal", &Contacts::setFavouriteMeal);
-	fillField("UnderwearColor", &Contacts::setUnderwearColor);
-	fillField("DarkestSecret", &Contacts::setDarkestSecret);
+	//fillField("Login", &Contacts::setLogin);
+	//fillField("Postal Adress", &Contacts::setPostalAdress);
+	//fillField("Email", &Contacts::setEmail);
+	//fillField("Phone Number", &Contacts::setPhoneNumber);
+	//fillField("Birthday", &Contacts::setBirthday);
+	//fillField("FavouriteMeal", &Contacts::setFavouriteMeal);
+	//fillField("UnderwearColor", &Contacts::setUnderwearColor);
+	//fillField("DarkestSecret", &Contacts::setDarkestSecret);
 	system("cls");
 }
 

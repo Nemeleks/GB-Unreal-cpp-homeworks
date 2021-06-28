@@ -18,6 +18,7 @@ private:
 	std::string darkestSecret;
 
 public:
+	Contacts();
 	void fillField(const std::string &msg, bool (Contacts::*f)(std::string str));
 	void fillContact();
 	std::string fill(const std::string msg);
