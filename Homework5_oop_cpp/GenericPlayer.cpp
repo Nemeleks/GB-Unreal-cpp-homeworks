@@ -1,5 +1,9 @@
 #include "GenericPlayer.h"
 
+GenericPlayer::GenericPlayer(std::string name) :
+playerName(name)
+{}
+
 bool GenericPlayer::isHitting()
 {
 	char answer;
