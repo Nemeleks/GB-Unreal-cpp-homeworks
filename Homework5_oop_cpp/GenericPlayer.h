@@ -7,6 +7,7 @@ class GenericPlayer :
 private:
     std::string playerName;
 public:
+    GenericPlayer(std::string name);
     virtual bool isHitting();
     bool isBoosted();
     void Bust() const;
