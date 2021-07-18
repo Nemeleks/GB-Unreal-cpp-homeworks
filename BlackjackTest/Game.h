@@ -13,6 +13,13 @@ private:
 	House& m_dealer;
 	std::vector<Card*> m_deck;
 
+	void giveCard(GenericPlayer& player);
+	void dealCards();
+	void shuffleDeck();
+	void addNewDeck();
+	void playerTurn(GenericPlayer& player);
+	void scoreCount();
+
 public:
 	Game(std::vector<Player*>& players, House& dealer);
 	std::vector<Card*> generateDeck();
