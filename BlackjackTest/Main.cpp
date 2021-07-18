@@ -35,8 +35,7 @@ int main()
 	Game game(pNames, dealer);
 	char answer = 'y';
 	do
-	{
-		
+	{		
 		game.gameStart();
 		game.gameEnd();
 		game.clearHands();

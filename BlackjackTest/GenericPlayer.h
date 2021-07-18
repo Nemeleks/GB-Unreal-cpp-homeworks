@@ -13,7 +13,9 @@ public:
     bool isBoosted() const;
     void Bust() const;
     std::string getName() const;
+    virtual void Win() const = 0;
     virtual void Lose() const = 0;
+    virtual void Push() const = 0;
 
     friend std::ostream& operator<<(std::ostream& out, const GenericPlayer& AGenericPlayer);
 };

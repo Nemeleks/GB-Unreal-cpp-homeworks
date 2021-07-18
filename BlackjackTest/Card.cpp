@@ -41,10 +41,24 @@ int Card::getValue() const
 	return value;
 }
 
+int Card::getRank() const
+{
+	return m_Rank;
+}
+
+int Card::getSuit() const
+{
+	return m_Suit;
+}
+
+bool Card::getFaceUp() const
+{
+	return m_IsFaceUp;
+}
 
 std::ostream& operator<<(std::ostream& out, Card& card)
 {
-	const std::string rank[] = { "0", "Ace", "2", "3", "4", "5", "6", "7", "8", "9","10", "Jack", "Queen", "King" };
+	const std::string rank[] = { "0", "A", "2", "3", "4", "5", "6", "7", "8", "9","10", "J", "Q", "K" };
 	const std::string suit[] = { "hearts", "diamonds", "spades", "clubs" };
 
 	if (!(card.m_IsFaceUp))

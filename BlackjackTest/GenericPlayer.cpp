@@ -19,7 +19,7 @@ void GenericPlayer::Bust() const
 {
 	if (isBoosted())
 	{
-		std::cout << playerName << "has " << getTotal() << "and now boosted" << std::endl;
+		std::cout << playerName << " has " << getTotal() << " and now was busted:(" << std::endl;
 	}
 }
 
@@ -35,11 +35,8 @@ std::ostream& operator<<(std::ostream& out, const GenericPlayer& AGenericPlayer)
 	std::vector<Card*>::const_iterator ciCard;
 	if (!(AGenericPlayer.m_Cards.empty()))
 	{
-		for (ciCard = AGenericPlayer.m_Cards.begin(); ciCard != AGenericPlayer.m_Cards.end(); ciCard++)
-		{
-			out << *(*ciCard);
-		}
-		out << "Total score: " << AGenericPlayer.getTotal() << std::endl;
+		out << AGenericPlayer.m_Cards << std::endl;
+		out <<AGenericPlayer.playerName<< " total score: " << AGenericPlayer.getTotal() << std::endl;
 	}
 	else
 	{

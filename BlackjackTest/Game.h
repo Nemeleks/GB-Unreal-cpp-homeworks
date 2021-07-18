@@ -17,15 +17,19 @@ private:
 	void dealCards();
 	void shuffleDeck();
 	void addNewDeck();
+	
 	void playerTurn(GenericPlayer& player);
-	void scoreCount();
+	void scoring(std::vector<int>::iterator& maxScore);
+	void resultRound(std::vector<int>& scores, std::vector<int>::iterator& maxScore);
+	std::vector<int>::iterator searchMaxScore(std::vector<int>& scores);
+	std::vector<Card*> generateDeck();
 
 public:
 	Game(std::vector<Player*>& players, House& dealer);
-	std::vector<Card*> generateDeck();
+	void clearHands();
 	void gameStart();
 	void gameEnd();
-	void clearHands();
-	int getDeckSize() const;
+	
+	size_t getDeckSize() const;
 };
 

@@ -47,20 +47,76 @@ void Game::playerTurn(GenericPlayer& player)
 		if (player.isBoosted())
 		{
 			std::cout << player << std::endl;
-			player.Lose();
+			player.Bust();
 			break;
 		}
 		std::cout << player << std::endl;
 	}
 }
 
-void Game::scoreCount()
+void Game::scoring(std::vector<int>::iterator& maxScore)
 {
 	std::vector<GenericPlayer*> maxScorePlayers;
-	for (size_t i = 0; i < length; i++)
+	for (size_t i = 0; i < m_numOfPlayers; i++)
 	{
+		if (m_players[i]->getTotal() == *maxScore)
+		{
+			maxScorePlayers.push_back(m_players[i]);
+		}
+	}
+	if (m_dealer.getTotal() == *maxScore)
+	{
+		maxScorePlayers.push_back(&m_dealer);
+	}
+	if (maxScorePlayers.size() > 1)
+	{
+		for (size_t i = 0; i < maxScorePlayers.size(); i++)
+		{
+			maxScorePlayers[i]->Push();
+		}
+	}
+	else
+	{
+		maxScorePlayers[0]->Win();
+	}
+}
+
+void Game::resultRound(std::vector<int>& scores, std::vector<int>::iterator& maxScore)
+{
+	if (scores.size() > 0)
+	{
+		scoring(maxScore);
+	}
+	else
+	{
+		std::cout << "All players was busted. No Winner :(" << std::endl;
+	}
+}
+
+std::vector<int>::iterator Game::searchMaxScore(std::vector<int>& scores)
+{
+
+	for (size_t i = 0; i < m_numOfPlayers; i++)
+	{
+		if (!m_players[i]->isBoosted())
+		{
+			int score = m_players[i]->getTotal();
+			std::cout << "player " << m_players[i]->getName() << " total: " << m_players[i]->getTotal() << std::endl;
+			scores.push_back(score);
+		}
 
 	}
+
+	if (!m_dealer.isBoosted())
+	{
+		std::cout << "dealer total: " << m_dealer.getTotal() << std::endl;
+		int dealerScore = m_dealer.getTotal();
+		scores.push_back(dealerScore);
+	}
+	std::vector<int>::iterator a;
+
+		a = std::max_element(std::begin(scores), std::end(scores));
+		return a;
 }
 
 Game::Game(std::vector<Player*>& players, House& dealer) :
@@ -108,90 +164,9 @@ void Game::gameStart()
 
 void Game::gameEnd()
 {
-	
 	std::vector<int> scores;
-	
-	for (size_t i = 0; i < m_numOfPlayers; i++)
-	{		
-		if (!m_players[i]->isBoosted())
-		{	
-			int score = m_players[i]->getTotal();
-			std::cout << "player "<< m_players[i]->getName()<< " total: " << m_players[i]->getTotal() << std::endl;
-			scores.push_back(score);
-		}
-
-	}
-	
-	if (!m_dealer.isBoosted())
-	{
-		std::cout <<"dealer total: " << m_dealer.getTotal() << std::endl;
-		int dealerScore = m_dealer.getTotal();
-		scores.push_back(dealerScore);
-	}
-	std::vector<int>::iterator a;
-	if (scores.size() > 0)
-	{
-		//for (size_t i = 0; i < scores.size(); i++)
-		//{
-		//	std::cout << scores[i] << std::endl;
-		//}
-		a = std::max_element(std::begin(scores), std::end(scores));
-
-		//std::cout << "max element is: " << *a << std::endl;
-		//std::cout << "max element at: " << std::distance(scores.begin(), a) << '\n';
-		//std::vector<Player*> maxScorePlayers;
-		//std::vector<Player*> pushScorePlayers;
-		for (size_t i = 0; i < m_numOfPlayers; i++)
-		{
-			if (m_players[i]->getTotal() == *a && m_dealer.getTotal() == m_players[i]->getTotal())
-			{
-				pushScorePlayers.push_back(m_players[i]);
-			}
-			if (pushScorePlayers.size() > 0)
-			{
-				for (size_t i = 0; i < pushScorePlayers.size(); i++)
-				{
-					pushScorePlayers[i]->Push();
-				}
-				m_dealer.Push();
-				return;
-			}
-			if (m_players[i]->getTotal() == *a)
-			{
-				maxScorePlayers.push_back(m_players[i]);
-			}
-
-			else if (m_dealer.getTotal() == *a)
-			{
-				m_dealer.Win();
-				return;
-			}
-		}
-		if (pushScorePlayers.size() > 0)
-		{
-			for (size_t i = 0; i < pushScorePlayers.size(); i++)
-			{
-				pushScorePlayers[i]->Push();
-			}
-			m_dealer.Push();
-		}
-		else if (maxScorePlayers.size() > 1)
-		{
-			for (size_t i = 0; i < maxScorePlayers.size(); i++)
-			{
-				maxScorePlayers[i]->Push();
-			}
-			return;
-		}
-		else
-		{
-			maxScorePlayers[0]->Win();
-		}
-	}
-	else
-	{
-		std::cout << "all players are busted" << std::endl;
-	}
+	auto maxScore = searchMaxScore(scores);
+	resultRound(scores, maxScore);
 
 }
 
@@ -204,7 +179,7 @@ void Game::clearHands()
 	m_dealer.clear();
 }
 
-int Game::getDeckSize() const
+size_t Game::getDeckSize() const
 {
 	return m_deck.size();
 }

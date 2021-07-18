@@ -37,6 +37,9 @@ public:
 	void Flip();
 	int getValue() const;
 	friend std::ostream& operator<<(std::ostream& out, Card& card);
+	int getRank() const;
+	int getSuit() const;
+	bool getFaceUp() const;
 
 };
 
