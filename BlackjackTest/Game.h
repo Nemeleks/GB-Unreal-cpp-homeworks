@@ -18,5 +18,7 @@ public:
 	std::vector<Card*> generateDeck();
 	void gameStart(std::vector<Player*> players, House& dealer);
 	void gameEnd(std::vector<Player*> players, House& dealer);
+	void clearHands(std::vector<Player*> players, House& dealer);
+	int getDeckSize() const;
 };
 

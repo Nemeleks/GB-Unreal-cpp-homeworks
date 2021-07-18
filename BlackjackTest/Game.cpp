@@ -33,6 +33,16 @@ std::vector<Card*> Game::generateDeck()
 
 void Game::gameStart(std::vector<Player*> players, House& dealer)
 {
+	std::cout << "cards in deck: " << m_deck.size() << std::endl;
+	if (m_deck.size() < 30)
+	{
+		std::vector<Card*> tmp;
+		tmp = generateDeck();
+		for (size_t i = 0; i < tmp.size(); i++)
+		{
+			m_deck.push_back(tmp[i]);
+		}
+	}
 	dealer.add(m_deck[0]);
 	m_deck.erase(m_deck.begin());
 	dealer.add(m_deck[0]);
@@ -79,15 +89,15 @@ void Game::gameStart(std::vector<Player*> players, House& dealer)
 
 void Game::gameEnd(std::vector<Player*> players, House& dealer)
 {
-	std::vector<int*> scores;
+	
+	std::vector<int> scores;
 	
 	for (size_t i = 0; i < m_numOfPlayers; i++)
 	{		
 		if (!players[i]->isBoosted())
 		{	
-			int* score = new int(players[i]->getTotal());
+			int score = players[i]->getTotal();
 			std::cout << "player "<< players[i]->getName()<< " total: " << players[i]->getTotal() << std::endl;
-			//*score = players[i]->getTotal();
 			scores.push_back(score);
 		}
 
@@ -97,57 +107,87 @@ void Game::gameEnd(std::vector<Player*> players, House& dealer)
 	{
 		std::cout <<"dealer total: " << dealer.getTotal() << std::endl;
 		int dealerScore = dealer.getTotal();
-		scores.push_back(&dealerScore);
+		scores.push_back(dealerScore);
 	}
-	std::vector<int*>::iterator a;
-	for (size_t i = 0; i < scores.size(); i++)
+	std::vector<int>::iterator a;
+	if (scores.size() > 0)
 	{
-		std::cout << *scores[i] << std::endl;
-	}
-	a = std::max_element(std::begin(scores), std::end(scores));
-
-	std::cout <<"max element is: " << *(*a) << std::endl;
-	std::cout << "max element at: " << std::distance(scores.begin(), a) << '\n';
-	std::vector<Player*> maxScorePlayers;
-	std::vector<Player*> pushScorePlayers;
-	for (size_t i = 0; i < m_numOfPlayers; i++)
-	{
-		if (players[i]->getTotal() == *(*a) && dealer.getTotal() == players[i]->getTotal())
+		for (size_t i = 0; i < scores.size(); i++)
 		{
-			pushScorePlayers.push_back(players[i]);
+			std::cout << scores[i] << std::endl;
 		}
-		if (players[i]->getTotal() == *(*a))
-		{
-			maxScorePlayers.push_back(players[i]);
-		}
+		a = std::max_element(std::begin(scores), std::end(scores));
 
-		else if (dealer.getTotal() == *(*a))
+		std::cout << "max element is: " << *a << std::endl;
+		std::cout << "max element at: " << std::distance(scores.begin(), a) << '\n';
+		std::vector<Player*> maxScorePlayers;
+		std::vector<Player*> pushScorePlayers;
+		for (size_t i = 0; i < m_numOfPlayers; i++)
 		{
-			dealer.Win();
+			if (players[i]->getTotal() == *a && dealer.getTotal() == players[i]->getTotal())
+			{
+				pushScorePlayers.push_back(players[i]);
+			}
+			if (pushScorePlayers.size() > 0)
+			{
+				for (size_t i = 0; i < pushScorePlayers.size(); i++)
+				{
+					pushScorePlayers[i]->Push();
+				}
+				dealer.Push();
+				return;
+			}
+			if (players[i]->getTotal() == *a)
+			{
+				maxScorePlayers.push_back(players[i]);
+			}
+
+			else if (dealer.getTotal() == *a)
+			{
+				dealer.Win();
+				return;
+			}
+		}
+		if (pushScorePlayers.size() > 0)
+		{
+			for (size_t i = 0; i < pushScorePlayers.size(); i++)
+			{
+				pushScorePlayers[i]->Push();
+			}
+			dealer.Push();
+		}
+		else if (maxScorePlayers.size() > 1)
+		{
+			for (size_t i = 0; i < maxScorePlayers.size(); i++)
+			{
+				maxScorePlayers[i]->Push();
+			}
 			return;
 		}
-	}
-	if (pushScorePlayers.size() > 0)
-	{
-		for (size_t i = 0; i < pushScorePlayers.size(); i++)
+		else
 		{
-			pushScorePlayers[i]->Push();
+			maxScorePlayers[0]->Win();
 		}
-		dealer.Push();
-	}
-	if (maxScorePlayers.size() > 1)
-	{
-		for (size_t i = 0; i < maxScorePlayers.size(); i++)
-		{
-			maxScorePlayers[i]->Push();
-		}
-		return;
 	}
 	else
 	{
-		maxScorePlayers[0]->Win();
+		std::cout << "all players boosted" << std::endl;
 	}
 
+}
+
+void Game::clearHands(std::vector<Player*> players, House& dealer)
+{
+	for (size_t i = 0; i < m_numOfPlayers; i++)
+	{
+		players[i]->clear();
+	}
+	dealer.clear();
+}
+
+int Game::getDeckSize() const
+{
+	return m_deck.size();
 }
 
 

@@ -33,50 +33,17 @@ int main()
 		pNames.push_back(pName);
 	}
 	Game game(numP, pNames, dealer);
-	game.gameStart(pNames, dealer);
-	game.gameEnd(pNames, dealer);
-
-
-	/*Player Mark("Mark");
-	std::vector<Card*> deck;
-	deck.reserve(52);
-	Card* card = nullptr;
-	rank ranks[] = { ace,two,three,four,five,six,seven,eight,nine,ten,jack,queen,king };
-	suit suits[] = { hearts, diamonds, spades, clubs };
-	
-	for (size_t i = 0; i < 4; i++)
+	char answer = 'y';
+	do
 	{
-		for (size_t j = 0; j < 13 ; j++)
-		{
-			card = new Card(ranks[j], suits[i]);
-			deck.push_back(card);
-		}		
-	}
-
-	std::random_device rd;
-	std::mt19937_64 g(rd());
-	std::shuffle(std::begin(deck), std::end(deck), g);
-
-	Mark.add(deck[0]);
-	deck.erase(deck.begin());
-	Mark.add(deck[0]);
-	deck.erase(deck.begin());
-	std::cout << Mark << std::endl;
-	
-			
-
-		while (Mark.isHitting())
-		{
-			Mark.add(deck[0]);
-			deck.erase(deck.begin());
-			if (Mark.isBoosted())
-			{
-				std::cout << Mark << std::endl;
-				Mark.Lose();
-				break;
-			}
-			std::cout << Mark << std::endl;
-		}*/
+		
+		game.gameStart(pNames, dealer);
+		game.gameEnd(pNames, dealer);
+		game.clearHands(pNames, dealer);
+		std::cout << "cards in deck: " << game.getDeckSize() << std::endl;
+		std::cout << "play again ? y/n: ";
+		std::cin >> answer;
+	} while (answer == 'y');
 
 		
 } 

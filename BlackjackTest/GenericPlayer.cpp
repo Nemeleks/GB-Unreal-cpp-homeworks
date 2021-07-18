@@ -30,6 +30,7 @@ std::string GenericPlayer::getName() const
 
 std::ostream& operator<<(std::ostream& out, const GenericPlayer& AGenericPlayer)
 {
+	out << std::endl;
 	out << AGenericPlayer.playerName << " cards is:" << std::endl;
 	std::vector<Card*>::const_iterator ciCard;
 	if (!(AGenericPlayer.m_Cards.empty()))
