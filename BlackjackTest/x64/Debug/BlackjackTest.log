@@ -1,3 +1,5 @@
 ﻿  Game.cpp
 C:\Users\Tanya\Documents\GitHub\GB-Unreal-cpp-homeworks\BlackjackTest\Game.cpp(190,22): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  Main.cpp
+  Generating Code...
   BlackjackTest.vcxproj -> C:\Users\Tanya\Documents\GitHub\GB-Unreal-cpp-homeworks\BlackjackTest\x64\Debug\BlackjackTest.exe

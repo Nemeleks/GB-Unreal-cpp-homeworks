@@ -32,14 +32,14 @@ int main()
 		pName = new Player(name);
 		pNames.push_back(pName);
 	}
-	Game game(numP, pNames, dealer);
+	Game game(pNames, dealer);
 	char answer = 'y';
 	do
 	{
 		
-		game.gameStart(pNames, dealer);
-		game.gameEnd(pNames, dealer);
-		game.clearHands(pNames, dealer);
+		game.gameStart();
+		game.gameEnd();
+		game.clearHands();
 		std::cout << "cards in deck: " << game.getDeckSize() << std::endl;
 		std::cout << "play again ? y/n: ";
 		std::cin >> answer;
