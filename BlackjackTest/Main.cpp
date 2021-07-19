@@ -59,10 +59,27 @@ int main()
 		{
 			int a = 0;
 			std::getline(std::cin, name);
+			if (name.size()>0)
+			{
+				while (name[0] == ' ')
+				{
+					name.erase(0);
+				}
+			}
 			if (i == 0)
 			{
-				names.push_back(name);
-				uniqueName = true;
+
+				if (!name.empty())
+				{
+					names.push_back(name);
+					uniqueName = true;
+				}
+				else
+				{
+					//std::cout << "Name '" << name << "' already used. Try again." << std::endl;
+					std::cout << "Enter Player " << i + 1 << " name: ";
+				}
+
 			}
 			else
 			{
@@ -72,8 +89,16 @@ int main()
 				}
 				if (a == 0)
 				{
-					names.push_back(name);
-					uniqueName = true;
+					if (!name.empty())
+					{
+						names.push_back(name);
+						uniqueName = true;
+					}
+					else
+					{
+						//std::cout << "Name '" << name << "' already used. Try again." << std::endl;
+						std::cout << "Enter Player " << i + 1 << " name: ";
+					}
 				}
 				else
 				{
