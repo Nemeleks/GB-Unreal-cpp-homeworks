@@ -3,7 +3,7 @@
 GenericPlayer::GenericPlayer(std::string name) :
 playerName(name),
 wins(0),
-loses(0),
+busteds(0),
 pushes(0)
 {}
 
@@ -23,7 +23,7 @@ void GenericPlayer::Bust()
 	if (isBusted())
 	{
 		std::cout << playerName << " has " << getTotal() << " and now was busted:(" << std::endl;
-		loses++;
+		busteds++;
 	}
 }
 
@@ -32,9 +32,14 @@ std::string GenericPlayer::getName() const
 	return playerName;
 }
 
-int GenericPlayer::getLoses() const
+int GenericPlayer::getBusteds() const
 {
-	return loses;
+	return busteds;
+}
+
+std::vector<Card*> GenericPlayer::getHand() const
+{
+	return m_Cards;
 }
 
 std::ostream& operator<<(std::ostream& out, const GenericPlayer& AGenericPlayer)

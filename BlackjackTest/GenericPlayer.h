@@ -7,7 +7,7 @@ class GenericPlayer :
 protected:
     std::string playerName;
     int wins;
-    int loses;
+    int busteds;
     int pushes;
 public:
     GenericPlayer(std::string name);
@@ -16,7 +16,8 @@ public:
     bool isBusted() const;
     void Bust();
     std::string getName() const;
-    int getLoses() const;
+    int getBusteds() const;
+    std::vector<Card*> getHand() const;
 
     virtual bool isHitting() const = 0;
     virtual void Win() = 0;

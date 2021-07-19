@@ -29,19 +29,57 @@ int main()
 	Player* pName = nullptr;
 	House dealer;
 	std::string name;
+	std::vector<std::string> names;
+	
+	std::cin.clear();
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	for (size_t i = 0; i < numP; i++)
 	{
+		bool uniqueName = false;
 		std::cout << "Enter Player " << i + 1 << " name: ";
-		std::getline(std::cin, name);
-		pName = new Player(name);
+		
+	
+		do
+		{
+			int a = 0;
+			std::getline(std::cin, name);
+			if (i == 0)
+			{
+				names.push_back(name);
+				uniqueName = true;
+			}
+			else
+			{
+				if (std::find(names.begin(), names.end(), name) != names.end())
+				{
+					a++;
+				}
+				if (a == 0)
+				{
+					names.push_back(name);
+					uniqueName = true;
+				}
+				else
+				{
+					std::cout << "Name '" << name << "' already used. Try again." << std::endl;
+					std::cout << "Enter Player " << i + 1 << " name: ";
+				}
+			}
+		}while (!uniqueName);
+	}
+
+	for (size_t i = 0; i < numP; i++)
+	{
+		pName = new Player(names[i]);
 		pNames.push_back(pName);
 	}
+
 	Game game(pNames, dealer);
 	char answer = 'y';
 	do
 	{		
 		game.gameStart();
-		game.gameEnd();
+		game.gameEnd();		
 		game.clearHands();
 
 		do

@@ -37,6 +37,26 @@ void Game::addNewDeck()
 	shuffleDeck();
 }
 
+bool Game::isBlackJack()
+{
+	for (size_t i = 0; i < m_numOfPlayers; i++)
+	{
+		if ((m_players[i]->getHand()[0]->getRank() == jack && m_players[i]->getHand()[0]->getSuit() == spades &&
+			m_players[i]->getHand()[1]->getRank() == ace && m_players[i]->getHand()[1]->getSuit() == spades) ||
+			(m_players[i]->getHand()[0]->getRank() == ace && m_players[i]->getHand()[0]->getSuit() == spades &&
+			m_players[i]->getHand()[1]->getRank() == jack && m_players[i]->getHand()[1]->getSuit() == spades))
+		{
+			std::cout << m_players[i]->getName() << " has BlackJack! Wow!" << std::endl;
+			m_players[i]->Win();
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+}
+
 void Game::playerTurn(GenericPlayer& player)
 {
 	addNewDeck();
@@ -150,16 +170,18 @@ std::vector<Card*> Game::generateDeck()
 
 void Game::gameStart()
 {
-	std::cout << "cards in deck: " << m_deck.size() << std::endl;
 	dealCards();
-	m_dealer.FlipFirstCard();
-	std::cout << m_dealer;
-	for (size_t i = 0; i < m_numOfPlayers; i++)
+	if (!isBlackJack())
 	{
-		playerTurn(*m_players[i]);
+		m_dealer.FlipFirstCard();
+		std::cout << m_dealer;
+		for (size_t i = 0; i < m_numOfPlayers; i++)
+		{
+			playerTurn(*m_players[i]);
+		}
+		m_dealer.FlipFirstCard();
+		playerTurn(m_dealer);
 	}
-	m_dealer.FlipFirstCard();
-	playerTurn(m_dealer);
 }
 
 void Game::gameEnd()
@@ -179,14 +201,14 @@ void Game::gameStats() const
 	{
 		std::cout << m_players[i]->getName() << " : " << std::endl;
 		std::cout << "Wins: " << m_players[i]->getWins() << std::endl;
-		std::cout << "Loses: " << m_players[i]->getLoses() << std::endl;
+		std::cout << "Busteds: " << m_players[i]->getBusteds() << std::endl;
 		std::cout << "Pushes: " << m_players[i]->getPushes() << std::endl;
 		std::cout << std::endl;
 	}
 
 	std::cout << m_dealer.getName() << " : " << std::endl;
 	std::cout << "Wins: " << m_dealer.getWins() << std::endl;
-	std::cout << "Loses: " << m_dealer.getLoses() << std::endl;
+	std::cout << "Busteds: " << m_dealer.getBusteds() << std::endl;
 	std::cout << "Pushes: " << m_dealer.getPushes() << std::endl;
 	std::cout << std::endl;
 }

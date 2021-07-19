@@ -18,6 +18,7 @@ private:
 	void shuffleDeck();
 	void addNewDeck();
 	
+	
 	void playerTurn(GenericPlayer& player);
 	void scoring(std::vector<int>::iterator& maxScore);
 	void resultRound(std::vector<int>& scores, std::vector<int>::iterator& maxScore);
@@ -30,6 +31,7 @@ public:
 	void gameStart();
 	void gameEnd();
 	void gameStats() const;
+	bool isBlackJack();
 	
 	size_t getDeckSize() const;
 };
