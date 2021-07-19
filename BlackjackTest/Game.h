@@ -29,6 +29,7 @@ public:
 	void clearHands();
 	void gameStart();
 	void gameEnd();
+	void gameStats() const;
 	
 	size_t getDeckSize() const;
 };

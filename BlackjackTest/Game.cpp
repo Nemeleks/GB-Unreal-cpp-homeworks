@@ -44,7 +44,7 @@ void Game::playerTurn(GenericPlayer& player)
 	while (player.isHitting())
 	{
 		giveCard(player);
-		if (player.isBoosted())
+		if (player.isBusted())
 		{
 			std::cout << player << std::endl;
 			player.Bust();
@@ -98,18 +98,18 @@ std::vector<int>::iterator Game::searchMaxScore(std::vector<int>& scores)
 
 	for (size_t i = 0; i < m_numOfPlayers; i++)
 	{
-		if (!m_players[i]->isBoosted())
+		if (!m_players[i]->isBusted())
 		{
 			int score = m_players[i]->getTotal();
-			std::cout << "player " << m_players[i]->getName() << " total: " << m_players[i]->getTotal() << std::endl;
+			std::cout << "Player " << m_players[i]->getName() << " total score: " << m_players[i]->getTotal() << std::endl;
 			scores.push_back(score);
 		}
 
 	}
 
-	if (!m_dealer.isBoosted())
+	if (!m_dealer.isBusted())
 	{
-		std::cout << "dealer total: " << m_dealer.getTotal() << std::endl;
+		std::cout << "House total score: " << m_dealer.getTotal() << std::endl;
 		int dealerScore = m_dealer.getTotal();
 		scores.push_back(dealerScore);
 	}
@@ -168,6 +168,27 @@ void Game::gameEnd()
 	auto maxScore = searchMaxScore(scores);
 	resultRound(scores, maxScore);
 
+}
+
+void Game::gameStats() const
+{
+	std::cout << std::endl;
+	std::cout << "Game stats :" << std::endl;
+	std::cout << std::endl;
+	for (size_t i = 0; i < m_numOfPlayers; i++)
+	{
+		std::cout << m_players[i]->getName() << " : " << std::endl;
+		std::cout << "Wins: " << m_players[i]->getWins() << std::endl;
+		std::cout << "Loses: " << m_players[i]->getLoses() << std::endl;
+		std::cout << "Pushes: " << m_players[i]->getPushes() << std::endl;
+		std::cout << std::endl;
+	}
+
+	std::cout << m_dealer.getName() << " : " << std::endl;
+	std::cout << "Wins: " << m_dealer.getWins() << std::endl;
+	std::cout << "Loses: " << m_dealer.getLoses() << std::endl;
+	std::cout << "Pushes: " << m_dealer.getPushes() << std::endl;
+	std::cout << std::endl;
 }
 
 void Game::clearHands()

@@ -27,9 +27,10 @@ bool Player::isHitting() const
 	}
 }
 
-void Player::Win() const
+void Player::Win() 
 {
 	std::cout << playerName << " is Win! Cograts!" << std::endl;
+	wins++;
 }
 
 void Player::Lose() const
@@ -37,7 +38,18 @@ void Player::Lose() const
 	std::cout << playerName << " is Lose :(" << std::endl;
 }
 
-void Player::Push() const
+void Player::Push() 
 {
 	std::cout << playerName << " is Push." << std::endl;
+	pushes++;
+}
+
+int Player::getWins() const
+{
+	return wins;
+}
+
+int Player::getPushes() const
+{
+	return pushes;
 }

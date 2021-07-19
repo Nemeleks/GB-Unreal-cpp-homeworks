@@ -1,7 +1,10 @@
 #include "GenericPlayer.h"
 
 GenericPlayer::GenericPlayer(std::string name) :
-playerName(name)
+playerName(name),
+wins(0),
+loses(0),
+pushes(0)
 {}
 
 GenericPlayer::~GenericPlayer()
@@ -10,22 +13,28 @@ GenericPlayer::~GenericPlayer()
 
 
 
-bool GenericPlayer::isBoosted() const
+bool GenericPlayer::isBusted() const
 {
 	return(getTotal() > 21);
 }
 
-void GenericPlayer::Bust() const
+void GenericPlayer::Bust() 
 {
-	if (isBoosted())
+	if (isBusted())
 	{
 		std::cout << playerName << " has " << getTotal() << " and now was busted:(" << std::endl;
+		loses++;
 	}
 }
 
 std::string GenericPlayer::getName() const
 {
 	return playerName;
+}
+
+int GenericPlayer::getLoses() const
+{
+	return loses;
 }
 
 std::ostream& operator<<(std::ostream& out, const GenericPlayer& AGenericPlayer)
@@ -35,8 +44,9 @@ std::ostream& operator<<(std::ostream& out, const GenericPlayer& AGenericPlayer)
 	std::vector<Card*>::const_iterator ciCard;
 	if (!(AGenericPlayer.m_Cards.empty()))
 	{
-		out << AGenericPlayer.m_Cards << std::endl;
+		out << AGenericPlayer.m_Cards;
 		out <<AGenericPlayer.playerName<< " total score: " << AGenericPlayer.getTotal() << std::endl;
+		out << std::endl;
 	}
 	else
 	{

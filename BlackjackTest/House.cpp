@@ -33,9 +33,10 @@ void House::FlipFirstCard()
 	}
 }
 
-void House::Win() const
+void House::Win() 
 {
 	std::cout << "House is Win!" << std::endl;
+	wins++;
 }
 
 void House::Lose() const
@@ -43,7 +44,18 @@ void House::Lose() const
 	std::cout << "House is Lose :(" << std::endl;
 }
 
-void House::Push() const
+void House::Push() 
 {
-	std::cout << "House is Push" << std::endl;
+	std::cout << "House is Push." << std::endl;
+	pushes++;
+}
+
+int House::getWins() const
+{
+	return wins;
+}
+
+int House::getPushes() const
+{
+	return pushes;
 }

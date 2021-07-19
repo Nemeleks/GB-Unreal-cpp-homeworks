@@ -7,8 +7,11 @@ public:
     Player(const std::string& name = "");
     virtual ~Player();
     virtual bool isHitting() const;
-    void Win() const;
+    void Win() ;
     void Lose() const;
-    void Push() const;
+    void Push() ;
+
+    int getWins() const;
+    int getPushes() const;
 };
 

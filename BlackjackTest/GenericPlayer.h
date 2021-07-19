@@ -6,16 +6,22 @@ class GenericPlayer :
 {
 protected:
     std::string playerName;
+    int wins;
+    int loses;
+    int pushes;
 public:
     GenericPlayer(std::string name);
     virtual ~GenericPlayer();
-    virtual bool isHitting() const = 0;
-    bool isBoosted() const;
-    void Bust() const;
+
+    bool isBusted() const;
+    void Bust();
     std::string getName() const;
-    virtual void Win() const = 0;
+    int getLoses() const;
+
+    virtual bool isHitting() const = 0;
+    virtual void Win() = 0;
     virtual void Lose() const = 0;
-    virtual void Push() const = 0;
+    virtual void Push() = 0;
 
     friend std::ostream& operator<<(std::ostream& out, const GenericPlayer& AGenericPlayer);
 };

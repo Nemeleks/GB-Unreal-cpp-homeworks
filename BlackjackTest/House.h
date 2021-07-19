@@ -8,8 +8,10 @@ public:
     virtual ~House();
     virtual bool isHitting() const;
     void FlipFirstCard();
-    void Win() const;
+    void Win() ;
     void Lose() const;
-    void Push() const;
+    void Push() ;
+    int getWins() const;
+    int getPushes() const;
 };
 
