@@ -17,8 +17,7 @@ private:
 	void dealCards();
 	void shuffleDeck();
 	void addNewDeck();
-	
-	
+		
 	void playerTurn(GenericPlayer& player);
 	void scoring(std::vector<int>::iterator& maxScore);
 	void resultRound(std::vector<int>& scores, std::vector<int>::iterator& maxScore);
@@ -35,4 +34,3 @@ public:
 	
 	size_t getDeckSize() const;
 };
-

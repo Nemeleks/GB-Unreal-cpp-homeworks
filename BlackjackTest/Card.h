@@ -40,6 +40,4 @@ public:
 	int getRank() const;
 	int getSuit() const;
 	bool getFaceUp() const;
-
 };
-

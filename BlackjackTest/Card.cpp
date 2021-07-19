@@ -6,7 +6,6 @@ Card::Card() :
 	m_IsFaceUp(true)
 
 {
-//	std::cout << "card create" << std::endl;
 }
 
 Card::Card(rank r, suit s):
@@ -14,12 +13,10 @@ Card::Card(rank r, suit s):
 	m_Suit(s),
 	m_IsFaceUp(true)
 {
-//	std::cout << "card create" << std::endl;
 }
 
 Card::~Card()
 {
-//	std::cout << "card delete" << std::endl;
 }
 
 void Card::Flip()

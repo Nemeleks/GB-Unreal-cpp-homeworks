@@ -11,8 +11,6 @@ GenericPlayer::~GenericPlayer()
 {
 }
 
-
-
 bool GenericPlayer::isBusted() const
 {
 	return(getTotal() > 21);

@@ -15,4 +15,3 @@ public:
     int getWins() const;
     int getPushes() const;
 };
-

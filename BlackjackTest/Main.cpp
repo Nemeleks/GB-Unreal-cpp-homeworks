@@ -9,6 +9,11 @@
 #include "Game.h"
 #include <limits>
 
+#define __CRTDBG_MAP_ALLOC
+#include <crtdbg.h>
+#define DEBUG_NEW new(_NORMAL_BLOCK, __FILE__, __LINE__)
+#define new DEBUG_NEW
+
 
 int main()
 {
@@ -21,8 +26,8 @@ int main()
 	std::cout << "|--@@@@@@--@@@@@@--@@----@@--@@@@@@--@@---@-----@@@@@@--@@----@@--@@@@@@--@@---@--|" << std::endl;
 	std::cout << "|---------------------------------------------------------------------------------|" << std::endl;
 	std::cout << std::endl << std::endl;
+	
 	int numP = 0;
-
 	std::string tmp;
 
 	std::cout << "Enter number of players(1-6): ";
@@ -38,7 +43,6 @@ int main()
 					break;
 				}
 			}
-
 		}
 		std::cout << "Enter number of players(1-6): ";
 	}
@@ -53,40 +57,38 @@ int main()
 	{
 		bool uniqueName = false;
 		std::cout << "Enter Player " << i + 1 << " name: ";
-		
-	
+			
 		do
 		{
 			int a = 0;
 			std::getline(std::cin, name);
-			if (name.size()>0)
-			{
+//			if (name.size()>0)
+//			{
 				while (name[0] == ' ')
 				{
-					name.erase(0);
+					name.erase(0);        // TODO erase dolzen vyzyvatsya 1 raz
 				}
-			}
-			if (i == 0)
-			{
+//			}
 
-				if (!name.empty())
-				{
-					names.push_back(name);
-					uniqueName = true;
-				}
-				else
-				{
-					//std::cout << "Name '" << name << "' already used. Try again." << std::endl;
-					std::cout << "Enter Player " << i + 1 << " name: ";
-				}
-
-			}
-			else
-			{
+			//if (i == 0)
+			//{
+			//	if (!name.empty())
+			//	{
+			//		names.push_back(name);
+			//		uniqueName = true;
+			//	}
+			//	else
+			//	{
+			//		std::cout << "Enter Player " << i + 1 << " name: ";
+			//	}
+			//}
+			//else
+			//{
 				if (std::find(names.begin(), names.end(), name) != names.end())
 				{
 					a++;
 				}
+
 				if (a == 0)
 				{
 					if (!name.empty())
@@ -96,16 +98,16 @@ int main()
 					}
 					else
 					{
-						//std::cout << "Name '" << name << "' already used. Try again." << std::endl;
 						std::cout << "Enter Player " << i + 1 << " name: ";
 					}
 				}
+
 				else
 				{
 					std::cout << "Name '" << name << "' already used. Try again." << std::endl;
 					std::cout << "Enter Player " << i + 1 << " name: ";
 				}
-			}
+//			}
 		}while (!uniqueName);
 	}
 
@@ -116,7 +118,7 @@ int main()
 	}
 
 	Game game(pNames, dealer);
-	std::string answer = "y";
+	std::string answer;
 	do
 	{		
 		game.gameStart();
@@ -132,5 +134,6 @@ int main()
 	} while (answer == "y");
 	game.gameStats();
 
+	_CrtDumpMemoryLeaks();
 	return 0;
 } 

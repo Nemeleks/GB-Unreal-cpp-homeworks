@@ -2,13 +2,11 @@
 
 Hand::Hand()
 {
-//	std::cout << "Create hand" << std::endl;
 	m_Cards.reserve(7);
 }
 
 Hand::~Hand()
 {
-//	std::cout << "delete Hand" << std::endl;
 	clear();
 }
 
@@ -46,7 +44,9 @@ int Hand::getTotal() const
 	{
 		total += (*it)->getValue();
 	}
+
 	bool containAce = false;
+
 	for (it = m_Cards.begin(); it != m_Cards.end(); it++)
 	{
 		if ((*it)->getValue() == static_cast<int>(rank::ace))
@@ -54,6 +54,7 @@ int Hand::getTotal() const
 			containAce = true;
 		}
 	}
+
 	if (containAce && total <= 11)
 	{
 		total += 10;
@@ -118,7 +119,6 @@ std::string Hand::createLine(int lineNum, const Card& card, bool FaceUp )
 			break;
 		}
 	}
-	
 }
 
 int Hand::getCardRankLenght(const Card& card)
@@ -129,10 +129,8 @@ int Hand::getCardRankLenght(const Card& card)
 
 std::ostream& operator<<(std::ostream& out, const std::vector<Card*>& Cards)
 {
-
 	for (size_t i = 0; i < 5; i++)
 	{
-
 		for (size_t j = 0; j < Cards.size(); j++)
 		{
 			if (Cards[j]->getFaceUp())

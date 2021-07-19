@@ -226,5 +226,3 @@ size_t Game::getDeckSize() const
 {
 	return m_deck.size();
 }
-
-
