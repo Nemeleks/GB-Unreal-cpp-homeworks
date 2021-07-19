@@ -23,15 +23,25 @@ int main()
 	std::cout << std::endl << std::endl;
 	int numP = 0;
 
-	do {
-		std::cout << "Enter number of players(1-6): ";
+	std::string tmp;
 
-		if (!(std::cin >> numP && std::cin.good())) {
-			std::cin.clear();
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	std::cout << "Enter number of players(1-6): ";
+	while (std::getline(std::cin, tmp))
+	{
+		std::stringstream ss(tmp);
+		if (ss >> numP)
+		{
+			if (numP > 0 && numP < 7)
+			{
+				if (ss.eof())
+				{
+					break;
+				}
+			}
+
 		}
-
-	} while (!(numP > 0 && numP < 7));
+		std::cout << "Enter number of players(1-6): ";
+	}
 
 	std::vector<Player*> pNames;
 	Player* pName = nullptr;
@@ -39,8 +49,6 @@ int main()
 	std::string name;
 	std::vector<std::string> names;
 	
-	std::cin.clear();
-	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	for (size_t i = 0; i < numP; i++)
 	{
 		bool uniqueName = false;
@@ -83,7 +91,7 @@ int main()
 	}
 
 	Game game(pNames, dealer);
-	char answer = 'y';
+	std::string answer = "y";
 	do
 	{		
 		game.gameStart();
@@ -93,10 +101,10 @@ int main()
 		do
 		{
 			std::cout << "Play again ? y/n: ";
-			std::cin >> answer;
-		} while (answer != 'y' && answer != 'n');
+			std::getline(std::cin, answer);
+		} while (answer != "y" && answer != "n");
 
-	} while (answer == 'y');
+	} while (answer == "y");
 	game.gameStats();
 
 	return 0;

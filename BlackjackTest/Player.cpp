@@ -11,13 +11,13 @@ Player::~Player()
 
 bool Player::isHitting() const
 {
-	char answer;
+	std::string answer;
 	do
 	{
 		std::cout << "Do you need one more card? y/n" << std::endl;
-		std::cin >> answer;
-	} while (answer != 'y' && answer != 'n');
-	if (answer == 'y')
+		std::getline(std::cin, answer);
+	} while (answer != "y" && answer != "n");
+	if (answer == "y")
 	{
 		return true;
 	}

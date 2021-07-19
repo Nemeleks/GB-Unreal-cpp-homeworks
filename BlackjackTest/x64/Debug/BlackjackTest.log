@@ -1,2 +1,6 @@
-﻿  Main.cpp
+﻿  Game.cpp
+  Main.cpp
+  Player.cpp
+  Создание кода...
+C:\Users\Professional\Documents\GitHub\GB-Unreal-cpp-homeworks\BlackjackTest\Game.cpp(58): warning C4715: Game::isBlackJack: значение возвращается не при всех путях выполнения
   BlackjackTest.vcxproj -> C:\Users\Professional\Documents\GitHub\GB-Unreal-cpp-homeworks\BlackjackTest\x64\Debug\BlackjackTest.exe
