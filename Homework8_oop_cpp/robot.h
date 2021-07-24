@@ -1,6 +1,9 @@
 #pragma once
 #include <vector>
+#include <string>
 #include<iostream>
+#include "OffTheField.h"
+#include "IllegalCommand.h"
 
 constexpr int MAX_FIELD_SIZE = 10;
 struct coord
@@ -16,8 +19,12 @@ private:
 	coord robotPosition;
 public:
 	robot();
+	~robot();
 	void printField();
 	void getCommand(std::string& command);
 	coord GetRobotPosition();
+	void playRobot();
+	void setPositionY(int pos);
+
 };
 
