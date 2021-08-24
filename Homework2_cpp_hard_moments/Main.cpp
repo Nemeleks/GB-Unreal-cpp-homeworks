@@ -84,6 +84,16 @@ int main()
     }
     std::cout << std::endl;
     t.print();
+    
+    pFirstNum = nullptr;
+    pSecondNum = nullptr;
+    pThirdNum = nullptr;
+    pFourthNum = nullptr;
+
+    delete pFirstNum;
+    delete pSecondNum;
+    delete pThirdNum;
+    delete pFourthNum;
     //====================================EXCERCISE 2 END==========================================
 
     //====================================EXCERCISE 3 START=========================================
@@ -135,15 +145,14 @@ int main()
     {
         int count = 0;
         t.start("for and find");
-        std::string str;
-        while (std::getline(in3, str))
-            for (size_t j = 0; j < str.size(); j++)
+        char c;
+        for (in3 >> c; !in3.eof(); in3 >> c)
+        {
+            if (vowels.find(c) != std::string::npos)
             {
-                if (vowels.find(str[j]) != std::string::npos)
-                {
-                    count++;
-                }
+                count++;
             }
+        }
         t.print();
         std::cout << "vowels in file: " << count << std::endl;
     }
@@ -158,13 +167,12 @@ int main()
     {
         int count = 0;
         t.start("for and for");
-        std::string str;
-        while (std::getline(in4,str))
-            for (size_t j = 0; j < str.size(); j++)
+        char c;       
+            for (in4>>c; !in4.eof();in4>>c)
             {
                 for (size_t i = 0; i < vowels.size(); i++)
                 {
-                    if (str[j] == vowels[i])
+                    if (c == vowels[i])
                     {
                         count++;
                     }
