@@ -2,7 +2,11 @@
 
 bool operator==(FullName first, FullName other)
 {
-    return std::tie(first) == std::tie(other);
+	if (first.FirstName == other.FirstName && first.LastName == other.LastName && first.MiddleName == other.MiddleName)
+	{
+		return true;
+	}
+	return false;
 }
 
 std::ostream& operator<<(std::ostream& out,const FullName& name)
